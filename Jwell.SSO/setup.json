@@ -1,0 +1,6 @@
+﻿{
+  "sign": "Jwell.SSO",
+  "version": "1.0.0.0",
+  "number": "EE02EFD151184F1F9F027D3316007A21",
+  "environment": "test" //test,qa,gray,product
+}

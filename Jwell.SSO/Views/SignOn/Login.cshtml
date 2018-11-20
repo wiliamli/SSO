@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/iview.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/login.css" />
+</head>
+<body>
+    <div>
+        <div id="app">
+            <h3>SSO统一登录</h3>
+            <Card shadow class="loginBox">
+                <i class="jwell"></i>
+                <i-form ref="formCustom" :model="formCustom" :rules="ruleCustom" :label-width="60" id="sso" method='post'>
+                    <div class="loginTitle">@ViewBag.Title</div>
+                    <span class="loginHr"></span>
+                    <form-item label="工号" prop="EmployeeID">
+                        <i-input type="text" v-model="formCustom.EmployeeID" name="EmployeeID" placeholder="请输入工号"></i-input>
+                    </form-item>
+                    <form-item label="密码" prop="Password">
+                        <i-input type="password" v-model="formCustom.Password" name="Password" placeholder="请输入密码"></i-input>
+                    </form-item>
+                    @*<form-item label="验证码" prop="valicode" class="valicode">
+                <i-input type="text" v-model="formCustom.valicode"></i-input>
+                <div class="iVali">
+                    <img id="valiCode" style="cursor: pointer;" src="/SignOn/ValidateCode" alt="验证码" />
+                </div>
+            </form-item>*@
+                    <form-item class="iButton">
+                        <i-button style="width:150px;margin-left:-80px" type="primary" v-on:click="handleSubmit('formCustom')" icon="ios-log-in">登&nbsp;录</i-button>
+                    </form-item>
+                </i-form>
+            </Card>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Scripts/vue.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/iview.min.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/login.js" charset="utf-8"></script>*@
+    <script type="text/javascript" charset="utf-8">
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                let regEn = /^[0-9a-zA-Z]+$/;
+                //const validateCode = (rule, value, callback) => {
+                //    if (value === '') {
+                //        callback(new Error('请输入验证码'));
+                //    } else {
+                //        callback();
+                //    }
+                //};
+                const validatePass = (rule, value, callback) => {
+                    if (value === '') {
+                        callback(new Error('请输入您的登录密码'));
+                    } else {
+                        callback();
+                    }
+                };
+                const validateJob = (rule, value, callback) => {
+                    if (!value) {
+                        return callback(new Error('请输入您的工号'));
+                    }
+                    //模拟异步验证效果
+                    setTimeout(() => {
+                        if ( !regEn.test(value) ) {
+                            callback(new Error('工号只能输入数字和字母'));
+                        } else {
+                            callback()
+                        }
+                    }, 500);
+                };
+                return {
+                    formCustom: {
+                        EmployeeID: '',
+                        Password: '',
+                        valicode: ''
+                    },
+                    ruleCustom: {
+                        EmployeeID: [
+                            { required: true, validator: validateJob, trigger: 'blur' }
+                        ],
+                        Password: [
+                            { required: true, validator: validatePass, trigger: 'blur' }
+                        ],
+                        //valicode: [
+                        //    { validator: validateCode, trigger: 'blur' }
+                        //]
+                    }
+                }
+            },
+            created() {                
+                if (window.location.search.includes('message')) {
+                    this.$Message.error('请重新登录！');
+                }
+            },
+            mounted() {
+                var box = document.getElementById('app');
+;               box.style.marginTop = ((document.documentElement.clientHeight - box.clientHeight) / 2)+'px';
+            },
+            methods: {
+                handleSubmit(name) {
+                    this.$refs[name].validate((valid) => {
+                        if (valid) {
+                            document.getElementById("sso").submit()
+                        } else {
+                            this.$Message.error('登录失败!');
+                        }
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+</html>

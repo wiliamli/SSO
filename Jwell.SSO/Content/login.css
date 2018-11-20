@@ -1,0 +1,79 @@
+﻿body {
+    background-image: url("../../Content/image/jwLoginBg.png");
+    background-size: 100%;
+    background-repeat: repeat;
+    font-family: Microsoft YaHei !important;
+}
+/*login容器*/
+#app {
+    display: flex;
+    /*flex-direction: column;*/
+    justify-content: space-between;
+    /*align-items: center;*/
+}
+
+/*login框标题*/
+h3 {
+    font-size: 20px;
+    line-height: 100px;
+    margin-left: 22%;
+    color:#fff;
+}
+p {
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom:25px;
+}
+.loginBox {
+    width:450px;
+    margin-right: 10%;
+    background-image: url("../../Content/image/jwLoginFormBg.png");
+    background-size: 40% 100%;
+    background-repeat: no-repeat;
+    padding:20px;
+    position:relative;
+}
+.jwell {
+    display: inline-block;
+    width: 135px;
+    height: 52px;
+    background-image: url("../../Content/image/fontImg.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position:absolute;
+    top:25px;
+    left:15px;
+}
+.ivu-form {
+    width: 60%;
+    float: right;
+}
+.ivu-form-item {
+    margin-bottom:35px;
+}
+.loginTitle {
+    width: 60%;
+}
+.loginHr {
+    display:inline-block;
+    width: 100%;
+    height: 1px;
+    background-color: #e1e1e1;
+    margin:15px 0px;
+}
+/*验证码框*/
+.valicode > div {
+    display: flex;
+}
+.iVali {
+    margin-left: 10px;
+}
+.iVali > img {
+    height: 100%;
+}
+/*登录按钮*/
+.iButton {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
